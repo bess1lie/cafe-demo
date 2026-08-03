@@ -25,6 +25,7 @@
 html{
   scroll-behavior:smooth;
   -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
 }
 
 body{
@@ -34,7 +35,7 @@ body{
   line-height:1.7;
   color:var(--text);
   background:var(--bg);
-  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
 body.__sans{
@@ -758,7 +759,7 @@ a:hover{text-decoration-thickness:2px}
   .nav__list{
     position:fixed;
     top:0;
-    right:-100%;
+    right:0;
     width:80%;
     max-width:320px;
     height:100vh;
@@ -766,13 +767,14 @@ a:hover{text-decoration-thickness:2px}
     flex-direction:column;
     gap:0;
     padding:56px 24px 32px;
-    transition:all 0.3s ease;
+    transform:translateX(100%);
+    transition:transform 0.3s ease;
     box-shadow:var(--shadow-lg);
     border-left:1px solid var(--border);
   }
 
   .nav__list.active{
-    right:0;
+    transform:translateX(0);
   }
 
   .nav__list li{

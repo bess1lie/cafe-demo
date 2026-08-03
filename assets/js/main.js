@@ -65,13 +65,27 @@
       return;
     }
 
-    menuToggle.addEventListener("click", function () {
-      navList.classList.add("active");
-    });
+    function setAria() {
+      menuToggle.setAttribute("aria-expanded", navList.classList.contains("active") ? "true" : "false");
+    }
 
     function closeMenu() {
       navList.classList.remove("active");
+      setAria();
     }
+
+    function openMenu() {
+      navList.classList.add("active");
+      setAria();
+    }
+
+    menuToggle.addEventListener("click", function () {
+      if (navList.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
 
     if (navClose) {
       navClose.addEventListener("click", closeMenu);
@@ -81,6 +95,13 @@
     var navLinks = navList.querySelectorAll(".nav__link");
     navLinks.forEach(function (link) {
       link.addEventListener("click", closeMenu);
+    });
+
+    /* Close on outside click */
+    document.addEventListener("click", function (e) {
+      if (!navList.classList.contains("active")) return;
+      if (navList.contains(e.target) || menuToggle.contains(e.target)) return;
+      closeMenu();
     });
 
     /* Close on Escape */
